@@ -1,0 +1,30 @@
+@font-face {
+  font-family: 'Raleway-ExtraBold';
+  src: local('Raleway-ExtraBold'),
+       url('../fonts/Raleway-ExtraBold.ttf') format("truetype");
+}
+
+body {
+  background-color: #168a58;
+}
+
+#logo {
+  font-family: 'Raleway-ExtraBold', sans-serif;
+  font-size: 80px;
+  text-align: center;
+}
+
+#logo p {
+  margin-bottom: 0px;
+}
+
+#searchBar {
+  margin-top: -30px;
+  text-align: center;
+}
+
+#searchBar input {
+  width: 500px;
+  padding: 8px;
+  border-radius: 10px;
+}
