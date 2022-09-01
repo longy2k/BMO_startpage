@@ -1,14 +1,14 @@
-var searchBar = document.getElementById("search");
+let searchBar = document.getElementById("search");
 
 searchBar.addEventListener("keyup", function(event) {
   if (event.code === "Enter") {
-    var searchValue = searchBar.value;
-    var splitValue = searchValue.split(" ");
+    let searchValue = searchBar.value;
+    let splitValue = searchValue.split(" ");
 
     // COMMANDS
     if (splitValue[0].charAt(0) == "/") {
-      var command = splitValue.shift();
-      var searchText = splitValue.join(" ");
+      let command = splitValue.shift();
+      let searchText = splitValue.join(" ");
       switch (command.substring(1)) {
         case 'a': //Amazon
           window.open("https://www.amazon.com/s?k=" + searchText, "_self") // Working on this part ATM!
