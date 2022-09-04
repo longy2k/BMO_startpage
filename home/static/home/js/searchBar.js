@@ -7,11 +7,59 @@ searchBar.addEventListener("keydown", function(event) {
 	}
 });
 
-searchBar.addEventListener("keyup", function(event) {
-  if (event.code === "Enter") {
-    let searchValue = searchBar.value;
-    let splitValue = searchValue.split(" ");
+var searchValue;
+var splitValue;
 
+searchBar.addEventListener("keyup", function(event) {
+  
+  if (event.code === "ArrowUp") {
+	if (newUl.childNodes.length != 0) {
+		pos--;
+		if (pos < 0) {
+			pos = newUl.childNodes.length-1;
+			newUl.childNodes[pos].style.backgroundColor = "red";
+			//~ console.log("Down: " + pos +  " | " + newUl.childNodes[pos].innerHTML);
+			searchValue = newUl.childNodes[pos].innerHTML;
+		}
+		else {
+			newUl.childNodes[pos].style.backgroundColor = "red";
+			//~ console.log("Down: " + pos +  " | " + newUl.childNodes[pos].innerHTML);
+			searchValue = newUl.childNodes[pos].innerHTML;
+		}
+	}
+  }
+  else if (event.code === "ArrowDown") {
+	if (newUl.childNodes.length != 0) {
+		pos++;
+		if (pos >= newUl.childNodes.length) {
+			pos = 0;
+			newUl.childNodes[pos].style.backgroundColor = "red";
+			//~ console.log("Down: " + pos +  " | " + newUl.childNodes[pos].innerHTML);
+			searchValue = newUl.childNodes[pos].innerHTML;
+		}
+		else {
+			newUl.childNodes[pos].style.backgroundColor = "red";
+			//~ console.log("Down: " + pos +  " | " + newUl.childNodes[pos].innerHTML);
+			searchValue = newUl.childNodes[pos].innerHTML;
+		}
+	} 
+  }
+  else {
+	if (event.code != "Enter") {
+		pos = -1;	
+	}
+  }
+  
+  console.log(searchValue);
+  
+  if (pos < 0) {
+	searchValue = searchBar.value;
+	splitValue = searchValue.split(" ");
+  }
+  
+  if (event.code === "Enter") {
+	  //~ console.log("pos: " + pos);
+	  //~ console.log("Inside: " + searchValue);
     // COMMANDS
     if (splitValue[0].charAt(0) == "/") {
       let command = splitValue.shift();
@@ -47,47 +95,14 @@ searchBar.addEventListener("keyup", function(event) {
         case 'umb': //University of Massachusetts Boston Search
           window.open("https://www.umb.edu/search?q=" + searchText, "_self");
           break;
-
       }
     }
     else {
-      window.open("https://www.google.com/search?q=" + searchValue, "_self")
+      window.open("https://www.google.com/search?q=" + searchValue, "_self");
     }
   }
   
-  if (event.code == "Backspace") {
-	pos = -1;
-  }
-  
-  if (event.code == "ArrowUp") {
-	if (newUl.childNodes.length != 0) {
-		pos--;
-		if (pos < 0) {
-			pos = newUl.childNodes.length-1;
-			newUl.childNodes[pos].style.backgroundColor = "red";
-			console.log("Down: " + pos);	
-		}
-		else {
-			newUl.childNodes[pos].style.backgroundColor = "red";
-			console.log("Down: " + pos);
-		}
-	}
-  }
-  
-  if (event.code == "ArrowDown") {
-	if (newUl.childNodes.length != 0) {
-		pos++;
-		if (pos >= newUl.childNodes.length) {
-			pos = 0;
-			newUl.childNodes[pos].style.backgroundColor = "red";
-			console.log("Down: " + pos);
-		}
-		else {
-			newUl.childNodes[pos].style.backgroundColor = "red";
-			console.log("Down: " + pos);
-		}
-	} 
-  }
+  console.log("pos: " + pos);
  
 });
 
