@@ -1,47 +1,11 @@
-let search_terms = ['apple', 'administration', 'antiplastic', 'audio', 'x', 'a cat took my food', 'There was a reason why the pineapple fell onto the floor of the campus', 'penis'];
-
-function autocompleteMatch(input) {
-  if (input == '') {
-    return [];
-  }
-  let reg = new RegExp(input, 'i');
-
-  function check_term(term) {
-    if (term.match(reg)) {
-      return term;
-    }
-  }
-
-  return search_terms.filter(check_term);
-}
-
-let newUl = document.createElement("ul");
-
-function showResults(val) {
-  let result = document.getElementById("searchSuggestion");
-  let terms = autocompleteMatch(val);
-  
-  newUl.innerHTML = '';
-	
-  for (let i = 0; i < terms.length; i++){
-    let newLi = document.createElement("li");
-    let text = document.createTextNode(terms[i]);
-	newLi.appendChild(text);
-	newLi.style.borderBottom = "1px solid black";
-    newUl.appendChild(newLi);
-  }
-  
-  if (newUl.lastChild) {
-	  newUl.lastChild.style.borderBottom = "";
-  }
-  
-  result.appendChild(newUl);
- 
-}
-
 let searchBar = document.getElementById("search");
-
 let pos = -1;
+
+searchBar.addEventListener("keydown", function(event) {
+	if (event.code === "ArrowUp") {
+		event.preventDefault();
+	}
+});
 
 searchBar.addEventListener("keyup", function(event) {
   if (event.code === "Enter") {
@@ -91,15 +55,21 @@ searchBar.addEventListener("keyup", function(event) {
     }
   }
   
+  if (event.code == "Backspace") {
+	pos = -1;
+  }
+  
   if (event.code == "ArrowUp") {
 	if (newUl.childNodes.length != 0) {
 		pos--;
 		if (pos < 0) {
 			pos = newUl.childNodes.length-1;
-			newUl.childNodes[pos].style.backgroundColor = "red";		
+			newUl.childNodes[pos].style.backgroundColor = "red";
+			console.log("Down: " + pos);	
 		}
 		else {
-			newUl.childNodes[pos].style.backgroundColor = "red";	
+			newUl.childNodes[pos].style.backgroundColor = "red";
+			console.log("Down: " + pos);
 		}
 	}
   }
@@ -110,12 +80,54 @@ searchBar.addEventListener("keyup", function(event) {
 		if (pos >= newUl.childNodes.length) {
 			pos = 0;
 			newUl.childNodes[pos].style.backgroundColor = "red";
+			console.log("Down: " + pos);
 		}
 		else {
-			newUl.childNodes[pos].style.backgroundColor = "red";	
+			newUl.childNodes[pos].style.backgroundColor = "red";
+			console.log("Down: " + pos);
 		}
-	}  
+	} 
+  }
+ 
+});
+
+let search_terms = ['apple', 'administration', 'antiplastic', 'audio', 'x', 'a cat took my food', 'There was a reason why the pineapple fell onto the floor of the campus', 'penis', 'beach', 'banana', 'bowling'];
+function autocompleteMatch(input) {
+  if (input == '') {
+    return [];
+  }
+  let reg = new RegExp(input, 'i');
+
+  function check_term(term) {
+    if (term.match(reg)) {
+      return term;
+    }
+  }
+
+  return search_terms.filter(check_term);
+}
+
+let newUl = document.createElement("ul");
+
+function showResults(val) {
+  let result = document.getElementById("searchSuggestion");
+  let terms = autocompleteMatch(val);
+  
+  newUl.innerHTML = '';
+	
+  for (let i = 0; i < terms.length; i++){
+    let newLi = document.createElement("li");
+    let text = document.createTextNode(terms[i]);
+	newLi.appendChild(text);
+	newLi.style.borderBottom = "1px solid black";
+    newUl.appendChild(newLi);
   }
   
-});
+  if (newUl.lastChild) {
+	  newUl.lastChild.style.borderBottom = "";
+  }
+  
+  result.appendChild(newUl);
+ 
+}
 
