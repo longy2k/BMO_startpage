@@ -33,13 +33,11 @@ body {
 #searchBar {
   width: 400px;
   margin: -30px auto 0px auto;
-/*
-  background-color: red;
-*/
   height: 85px;
 }
 
 #searchBar input {
+  border: 3px solid black;
   width: 380px;
   padding: 8px;
   border-radius: 10px;
@@ -50,7 +48,8 @@ body {
   background-color: white;
   font-family: 'Dhurjati-Regular';
   font-size: 22px;
-  margin-top: -15px;
+  margin-top: -10px;
+  border: 3px solid black;
   border-radius: 10px;
 }
 

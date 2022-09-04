@@ -11,18 +11,20 @@ var searchValue;
 var splitValue;
 
 searchBar.addEventListener("keyup", function(event) {
+	
+  let suggestionSelectColor = "#9cc9bc";
   
   if (event.code === "ArrowUp") {
 	if (newUl.childNodes.length != 0) {
 		pos--;
 		if (pos < 0) {
 			pos = newUl.childNodes.length-1;
-			newUl.childNodes[pos].style.backgroundColor = "red";
+			newUl.childNodes[pos].style.backgroundColor = suggestionSelectColor;
 			//~ console.log("Down: " + pos +  " | " + newUl.childNodes[pos].innerHTML);
 			searchValue = newUl.childNodes[pos].innerHTML;
 		}
 		else {
-			newUl.childNodes[pos].style.backgroundColor = "red";
+			newUl.childNodes[pos].style.backgroundColor = suggestionSelectColor;
 			//~ console.log("Down: " + pos +  " | " + newUl.childNodes[pos].innerHTML);
 			searchValue = newUl.childNodes[pos].innerHTML;
 		}
@@ -33,12 +35,12 @@ searchBar.addEventListener("keyup", function(event) {
 		pos++;
 		if (pos >= newUl.childNodes.length) {
 			pos = 0;
-			newUl.childNodes[pos].style.backgroundColor = "red";
+			newUl.childNodes[pos].style.backgroundColor = suggestionSelectColor;
 			//~ console.log("Down: " + pos +  " | " + newUl.childNodes[pos].innerHTML);
 			searchValue = newUl.childNodes[pos].innerHTML;
 		}
 		else {
-			newUl.childNodes[pos].style.backgroundColor = "red";
+			newUl.childNodes[pos].style.backgroundColor = suggestionSelectColor;
 			//~ console.log("Down: " + pos +  " | " + newUl.childNodes[pos].innerHTML);
 			searchValue = newUl.childNodes[pos].innerHTML;
 		}
@@ -49,8 +51,6 @@ searchBar.addEventListener("keyup", function(event) {
 		pos = -1;	
 	}
   }
-  
-  console.log(searchValue);
   
   if (pos < 0) {
 	searchValue = searchBar.value;
@@ -127,15 +127,19 @@ let newUl = document.createElement("ul");
 function showResults(val) {
   let result = document.getElementById("searchSuggestion");
   let terms = autocompleteMatch(val);
+  let limit = 6;
   
   newUl.innerHTML = '';
+  
 	
   for (let i = 0; i < terms.length; i++){
-    let newLi = document.createElement("li");
-    let text = document.createTextNode(terms[i]);
-	newLi.appendChild(text);
-	newLi.style.borderBottom = "1px solid black";
-    newUl.appendChild(newLi);
+	if (i < limit) {
+		let newLi = document.createElement("li");
+		let text = document.createTextNode(terms[i]);
+		newLi.appendChild(text);
+		newLi.style.borderBottom = "1px solid black";
+		newUl.appendChild(newLi);
+	}
   }
   
   if (newUl.lastChild) {
