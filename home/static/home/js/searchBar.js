@@ -174,14 +174,16 @@ document.addEventListener('mouseover', function(event) {
 	let target = autocompleteMatch(event.target.innerHTML);
 
 	for (let i = 0; i < search_terms.length; i++) {
-		let text = '' + highlightCursor[i].innerHTML; 
-		if (target[0] == text) {
-			highlightCursor[i].style.backgroundColor = suggestionSelectColor;
+		if (highlightCursor[i] != null) {
+			let text = '' + highlightCursor[i].innerHTML; 
+			if (target[0] == text) {
+				highlightCursor[i].style.backgroundColor = suggestionSelectColor;
+			}
+			else {
+				highlightCursor[i].style.backgroundColor = "white";
+			}	
 		}
-		else {
-			highlightCursor[i].style.backgroundColor = "white";
-		}	
-	}	
+	}
 	
 });
 
