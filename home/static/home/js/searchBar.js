@@ -10,9 +10,9 @@ searchBar.addEventListener("keydown", function(event) {
 var searchValue;
 var splitValue;
 
+var suggestionSelectColor = "#9cc9bc";
+
 searchBar.addEventListener("keyup", function(event) {
-	
-  let suggestionSelectColor = "#9cc9bc";
   
   if (event.code === "ArrowUp") {
 	if (newUl.childNodes.length != 0) {
@@ -106,7 +106,7 @@ searchBar.addEventListener("keyup", function(event) {
  
 });
 
-let search_terms = ['apple', 'administration', 'antiplastic', 'audio', 'x', 'a cat took my food', 'There was a reason why the pineapple fell onto the floor of the campus', 'penis', 'beach', 'banana', 'bowling'];
+let search_terms = ['apple', 'battery', 'cheese', 'what', 'huh', 'audio', 'Once upon a time', 'ABCDEFGHIJKL', 'xxx', 'banana', 'bowling'];
 function autocompleteMatch(input) {
   if (input == '') {
     return [];
@@ -149,4 +149,52 @@ function showResults(val) {
   result.appendChild(newUl);
  
 }
+
+document.addEventListener('click', function(event){
+	let searchSuggestion = document.querySelectorAll("#searchSuggestion li");
+	console.log(event.target);
+	for (let i = 0; i < searchSuggestion.length; i++) {
+		if (event.target != searchSuggestion[i]) {
+			searchSuggestion[i].style.display = "none";
+		}
+	}
+	if (event.target == searchBar) {
+		showResults(searchValue);
+	}
+	
+	
+});
+
+
+
+
+
+document.addEventListener('mouseover', function(event) {
+	let highlightCursor = document.querySelectorAll("#searchSuggestion li");
+	let target = autocompleteMatch(event.target.innerHTML);
+
+	for (let i = 0; i < search_terms.length; i++) {
+		let text = '' + highlightCursor[i].innerHTML; 
+		if (target[0] == text) {
+			highlightCursor[i].style.backgroundColor = suggestionSelectColor;
+		}
+		else {
+			highlightCursor[i].style.backgroundColor = "white";
+		}	
+	}	
+	
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
 
